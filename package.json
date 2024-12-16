@@ -1,0 +1,60 @@
+{
+  "name": "lottery-backend",
+  "version": "1.0.0",
+  "description": "node & mongodb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "node ./http/server.js"
+  },
+  "keywords": [
+    "node.js",
+    "express",
+    "jwt",
+    "login",
+    "registration",
+    "authentication",
+    "authorization",
+    "mongodb",
+    "mongoose"
+  ],
+  "author": "bezkoder",
+  "license": "ISC",
+  "dependencies": {
+    "assert": "^2.0.0",
+    "bcryptjs": "^2.4.3",
+    "browserify-zlib": "^0.2.0",
+    "child_process": "^1.0.2",
+    "compression": "^1.7.4",
+    "cookie-session": "^1.4.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "crypto-browserify": "^3.12.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.17.1",
+    "fs": "^0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
+    "jwa": "^2.0.0",
+    "moment-timezone": "^0.5.43",
+    "mongodb-client-encryption": "^2.8.0",
+    "mongoose": "^5.13.13",
+    "mongoose-auto-increment": "^5.0.1",
+    "multer": "^1.4.5-lts.1",
+    "net-browserify": "^0.2.4",
+    "node-cron": "^3.0.2",
+    "path": "^0.12.7",
+    "querystring-es3": "^0.2.1",
+    "spdy": "^4.0.2",
+    "stream": "^0.0.2",
+    "stream-http": "^3.2.0",
+    "url": "^0.11.1",
+    "util": "^0.12.5",
+    "webpack": "^5.88.2",
+    "ws": "^8.13.0",
+    "zlib": "^1.0.5"
+  },
+  "devDependencies": {
+    "webpack-cli": "^5.1.4"
+  }
+}
