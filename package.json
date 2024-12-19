@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "start": "node ./http/server.js"
+    "start": "node ./http/server.js",
+    "dev": "nodemon app.js"
   },
   "keywords": [
     "node.js",
@@ -55,6 +56,7 @@
     "zlib": "^1.0.5"
   },
   "devDependencies": {
+    "nodemon": "^3.1.9",
     "webpack-cli": "^5.1.4"
   }
 }

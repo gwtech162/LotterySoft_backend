@@ -1,7 +1,7 @@
 // app.js
 const express = require("express");
 const cors = require("cors");
-const {join} = require("path");
+const { join } = require("path");
 const bodyParser = require('body-parser');
 const cron = require('node-cron');
 const multer = require('multer');
@@ -26,14 +26,14 @@ const PercentageLimit = require("./routes/subAdmin/PercentageLimit.routes");
 const compression = require('compression');
 const zlib = require('zlib');
 require("dotenv").config({
-  path:join(__dirname,"..",".env")
+  path: join(__dirname, "..", ".env")
 });
 
 const app = express();
 
 // app.use(cors({ origin:"*" }));
 // app.use(cors({ origin:"http://gwtechsoft.com" }));
-const allowedOrigins = ['http://localhost:3000','http://localhost:3001', 'http://gwtechsoft.com', 'http://204.12.203.235','https://lottery-softfront.onrender.com'];
+const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001', 'http://gwtechsoft.com', 'http://204.12.203.235', 'https://lottery-softfront.onrender.com'];
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {
@@ -84,21 +84,21 @@ const GameCategory = db.gameCategory;
 const createInitialGameNameData = async () => {
   try {
     const existGameCategory = await GameCategory.exists();
-    if ( existGameCategory ) {
+    if (existGameCategory) {
       console.log("Initial game category data already exists!");
       return;
     }
 
     const gameNameData = [
-      {gameName: "BLT", positions: 3, requiredLength: 2},
-      {gameName: "L3C", positions: 1, requiredLength: 3},
-      {gameName: "L4C 1", positions: 1, requiredLength: 4},
-      {gameName: "L4C 2", positions: 1, requiredLength: 4},
-      {gameName: "L4C 3", positions: 1, requiredLength: 4},
-      {gameName: "L5C 1", positions: 1, requiredLength: 5},
-      {gameName: "L5C 2", positions: 1, requiredLength: 5},
-      {gameName: "L5C 3", positions: 1, requiredLength: 5},
-      {gameName: "MRG", positions: 6, requiredLength: 4}
+      { gameName: "BLT", positions: 3, requiredLength: 2 },
+      { gameName: "L3C", positions: 1, requiredLength: 3 },
+      { gameName: "L4C 1", positions: 1, requiredLength: 4 },
+      { gameName: "L4C 2", positions: 1, requiredLength: 4 },
+      { gameName: "L4C 3", positions: 1, requiredLength: 4 },
+      { gameName: "L5C 1", positions: 1, requiredLength: 5 },
+      { gameName: "L5C 2", positions: 1, requiredLength: 5 },
+      { gameName: "L5C 3", positions: 1, requiredLength: 5 },
+      { gameName: "MRG", positions: 6, requiredLength: 4 }
     ]
 
     await GameCategory.create(gameNameData);
@@ -107,11 +107,11 @@ const createInitialGameNameData = async () => {
   }
 };
 
-const createInitialAdminData = async() => {
+const createInitialAdminData = async () => {
   try {
 
     const existAdmin = await User.exists();
-    if ( existAdmin ) {
+    if (existAdmin) {
       console.log("Initial user data already exists!");
       return;
     }
@@ -119,7 +119,7 @@ const createInitialAdminData = async() => {
     const password = "happy0831";
     const hashedPassword = await bcrypt.hash(password, 10);
     const adminData = [
-      {userName: "LuckyMan", role: "admin", password: hashedPassword}
+      { userName: "LuckyMan", role: "admin", password: hashedPassword }
     ]
 
     await User.create(adminData);
@@ -131,48 +131,48 @@ const createInitialAdminData = async() => {
 
 const dbUrl = process.env.MONGODB_HOST ? process.env.MONGODB_HOST : `mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`;
 db.mongoose
-// .connect(`${dbConfig.URI}`, {
-.connect(dbUrl, {
+  .connect(`${dbConfig.URI}`, {
+    // .connect(dbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
   })
   .then(async () => {
     console.log("Successfully connect to MongoDB.");
-    
+
     User.createIndexes()
-    .then(() => {
-      createInitialAdminData();
-    })
-    .catch((err) => {
-      console.error("Error creating indexes: ", err);
-    })
+      .then(() => {
+        createInitialAdminData();
+      })
+      .catch((err) => {
+        console.error("Error creating indexes: ", err);
+      })
 
     GameCategory.createIndexes()
-    .then(() => {
-      createInitialGameNameData();
-    })
-    .catch((err) => {
-      console.error("Error creating indexes: ", err)
-    })
+      .then(() => {
+        createInitialGameNameData();
+      })
+      .catch((err) => {
+        console.error("Error creating indexes: ", err)
+      })
 
     cron.schedule('0 0 * * *', cronTask);
-    
+
   })
   .catch((err) => {
     console.error("Connection error", err);
     process.exit();
   });
 
-  function cronTask() {
-    const LimitCalc = db.limitCalc;
-    LimitCalc.collection.drop()
-    .then( () => {
+function cronTask() {
+  const LimitCalc = db.limitCalc;
+  LimitCalc.collection.drop()
+    .then(() => {
       console.log("Clean limit calc!");
     }).catch((error) => {
       console.error("Error clean limit calc collection: ", error);
     })
-  }
+}
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to lottery application." });
@@ -199,7 +199,7 @@ PercentageLimit(app);
 app.use((err, req, res, next) => {
   if (err instanceof multer.MulterError) {
     return res.status(400).json({
-      success:false,
+      success: false,
       message: err.message
     });
   } else if (err) {

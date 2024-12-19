@@ -27,7 +27,7 @@ module.exports = function (app) {
   // winner ticket get
   app.get(
     "/api/seller/getwintickets",
-    [authJwt.verifyToken,  authJwt.isSeller],
+    [authJwt.verifyToken, authJwt.isSeller],
     controller.matchWinningNumbers
   );
 
@@ -41,48 +41,48 @@ module.exports = function (app) {
   // Read all
   app.post(
     "/api/seller/getwiningnumber",
-    [authJwt.verifyToken,  authJwt.isSeller],
+    [authJwt.verifyToken, authJwt.isSeller],
     controller.readWinningNumber
   );
 
   //Lottery Time Check
   app.get(
     "/api/seller/lotterytimecheck",
-    [authJwt.verifyToken,  authJwt.isSeller],
+    [authJwt.verifyToken, authJwt.isSeller],
     controller.lotteryTimeCheck
   );
 
   //Lottery Time Check
   app.get(
     "/api/seller/getticketnumbers",
-    [authJwt.verifyToken,  authJwt.isSeller],
+    [authJwt.verifyToken, authJwt.isSeller],
     controller.getTicketNumbers
   );
 
   // Delete
   app.delete(
     "/api/seller/deleteticket/:id",
-    [authJwt.verifyToken,  authJwt.isSeller],
+    [authJwt.verifyToken, authJwt.isSeller],
     controller.deleteTicket
   );
 
   // Delete
   app.delete(
     "/api/seller/deleteticketforever/:id",
-    [authJwt.verifyToken,  authJwt.isSeller],
+    [authJwt.verifyToken, authJwt.isSeller],
     controller.deleteTicketForever
   );
 
   app.get(
     "/api/seller/getdeletedtickets",
-    [authJwt.verifyToken,  authJwt.isSeller],
+    [authJwt.verifyToken, authJwt.isSeller],
     controller.getDeletedTicket
   );
 
   // replay ticket
   app.post(
     "/api/seller/replayticket",
-    [authJwt.verifyToken,  authJwt.isSeller],
+    [authJwt.verifyToken, authJwt.isSeller],
     controller.replayTicket
   );
 };
