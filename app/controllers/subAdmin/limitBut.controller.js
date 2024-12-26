@@ -4,7 +4,7 @@
 const mongoose = require("mongoose");
 const db = require("../../models");
 const LimitBut = db.limits;
-const specificLimits = db.specificLimits;
+
 
 // Create
 //this is updated for supervisor limit
@@ -71,7 +71,7 @@ exports.addLimitBut = async (req, res) => {
 
     res.send(newLimit);
   } catch (err) {
-    console.log(err);
+    // console.error(err);
     res.status(500).json({ message: "Server Error" });
   }
 };
@@ -91,27 +91,6 @@ exports.getLimitButAll = async (req, res) => {
     res.json(limits);
   } catch (err) {
     // console.error(err);
-    res.status(500).json({ message: "Server Error" });
-  }
-};
-
-// Read
-exports.getLimitBut = async (req, res) => {
-  try {
-    const { general } = req.query;
-    let limits = null;
-    if (general == "true") {
-      limits = await LimitBut.find({
-        subAdmin: req.userId,
-      }).populate("seller");
-    } else {
-      limits = await specificLimits.find({
-        subAdmin: req.userId,
-      }).populate("seller");
-    }
-    res.json(limits);
-  } catch (err) {
-    console.error(err);
     res.status(500).json({ message: "Server Error" });
   }
 };
