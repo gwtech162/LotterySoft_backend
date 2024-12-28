@@ -18,7 +18,7 @@ module.exports = function (app) {
   app.get(
     "/api/subadmin/getlimitbut",
     [authJwt.verifyToken, authJwt.isSubAdmin],
-    controller.getLimitBut
+    controller.getLimitButAll //was controller.getLimitBut
   );
 
   // Read Seller
